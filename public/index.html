@@ -1,58 +1,155 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Login</title>
+    <meta charset="UTF-8">
+    <title>My Tech Portal</title>
+
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* ===== BODY ===== */
         body {
-            font-family: Arial;
-            background: #f2f2f2;
-        }
-
-        .box {
-            width: 300px;
-            margin: 100px auto;
-            background: #fff;
-            padding: 20px;
-            box-shadow: 0 0 10px #aaa;
-        }
-
-        input, button {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-        }
-
-        button {
-            background: #007bff;
+            background: linear-gradient(120deg,#0f2027,#203a43,#2c5364);
             color: white;
-            border: none;
+            height: 100vh;
+            overflow: hidden;
         }
 
-        #msg {
-            color: red;
-            text-align: center;
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            width: 220px;
+            height: 100vh;
+            background: rgba(0,0,0,0.4);
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 20px;
+        }
+
+            .sidebar h2 {
+                text-align: center;
+                margin-bottom: 30px;
+                color: #00eaff;
+            }
+
+            .sidebar a {
+                display: block;
+                padding: 12px;
+                margin: 10px 0;
+                text-decoration: none;
+                color: white;
+                background: rgba(255,255,255,0.1);
+                border-radius: 5px;
+                transition: 0.3s;
+            }
+
+                .sidebar a:hover {
+                    background: #00eaff;
+                    color: black;
+                }
+
+        /* ===== MAIN CONTENT ===== */
+        .main {
+            margin-left: 220px;
+            padding: 60px;
+            height: 100vh;
+        }
+
+            /* ===== TITLE ===== */
+            .main h1 {
+                font-size: 48px;
+                animation: slideDown 1.5s ease;
+            }
+
+            .main span {
+                color: #00eaff;
+            }
+
+            /* ===== TEXT ===== */
+            .main p {
+                margin-top: 20px;
+                max-width: 600px;
+                font-size: 18px;
+                line-height: 1.6;
+                opacity: 0;
+                animation: fadeIn 2s ease forwards;
+                animation-delay: 1s;
+            }
+
+        /* ===== IMAGE ===== */
+        .tech-img {
+            margin-top: 40px;
+            width: 380px;
+            animation: float 3s infinite ease-in-out;
+            filter: drop-shadow(0 0 15px #00eaff);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
+
 <body>
 
-    <div class="box">
-        <h3>Login</h3>
-        <input id="username" placeholder="Username">
-        <input id="password" type="password" placeholder="Password">
-        <button onclick="login()">Login</button>
-        <p id="msg"></p>
+    <!-- ===== SIDEBAR ===== -->
+    <div class="sidebar">
+        <h2>My Portal</h2>
+        <a href="login.html">🔐 Login</a>
+        <a href="login.html">📝 Signup</a>
+        <a href="#">ℹ️ About</a>
+        <a href="#">📞 Contact</a>
     </div>
 
-    <script>
-function login() {
-    if (username.value === "admin" && password.value === "123") {
-        window.location = "dashboard.html";
-    } else {
-        msg.innerText = "Invalid Login";
-    }
-}
-    </script>
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="main">
+        <h1>Welcome to <span>Tech World</span></h1>
+
+        <p>
+            Yahan par computer data processing, software solutions,
+            secure login systems aur modern web technology ka use hota hai.
+            Ye portal technology aur innovation ko dhyan me rakhkar banaya gaya hai.
+        </p>
+
+        <!-- Free online image (computer / data theme) -->
+        <img class="tech-img"
+             src="https://cdn-icons-png.flaticon.com/512/2721/2721291.png"
+             alt="Technology">
+    </div>
 
 </body>
 </html>
