@@ -1,17 +1,14 @@
 const express = require("express");
 const mysql = require("mysql2");
-const bcrypt = require("bcryptjs"); // Railway-safe
+const bcrypt = require("bcryptjs");
 const path = require("path");
 
 const app = express();
 
-/* ================= MIDDLEWARE ================= */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.use(express.static(path.join(__dirname, "public")));
 
-/* ================= MYSQL ================= */
 const db = mysql.createConnection({
   host: process.env.MYSQLHOST,
   user: process.env.MYSQLUSER,
@@ -23,20 +20,16 @@ const db = mysql.createConnection({
 
 db.connect(err => {
   if (err) {
-    console.error("MySQL connection error:", err.message);
+    console.error("MySQL error:", err.message);
   } else {
     console.log("MySQL Connected");
   }
 });
 
-/* ================= ROUTES ================= */
-
-// ROOT ROUTE
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "login.html"));
 });
 
-// SIGNUP
 app.post("/signup", async (req, res) => {
   try {
     const { fullname, email, username, password, cpassword } = req.body;
@@ -52,6 +45,42 @@ app.post("/signup", async (req, res) => {
     const hash = await bcrypt.hash(password, 10);
 
     db.query(
-      "INSERT INTO users
+      "INSERT INTO users (fullname,email,username,password) VALUES (?,?,?,?)",
+      [fullname, email, username, hash],
+      err => {
+        if (err) {
+          return res.json({ success: false, message: "User already exists" });
+        }
+        res.json({ success: true, message: "Signup successful" });
+      }
+    );
+  } catch (e) {
+    res.json({ success: false, message: "Server error" });
+  }
+});
+
+app.post("/login", (req, res) => {
+  const { username, password } = req.body;
+
+  db.query(
+    "SELECT * FROM users WHERE username = ?",
+    [username],
+    async (err, rows) => {
+      if (err || rows.length === 0) {
+        return res.json({ success: false });
+      }
+
+      const ok = await bcrypt.compare(password, rows[0].password);
+      res.json({ success: ok });
+    }
+  );
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log("Server running on port " + PORT);
+});
+
+
 
 
