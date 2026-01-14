@@ -45,7 +45,7 @@ app.post("/signup", async (req, res) => {
         const hash = await bcrypt.hash(password, 10);
 
         db.query(
-            "INSERT INTO users (fullname,email,username,password) VALUES (?,?,?,?)",
+            "INSERT INTO USER_LISTS (fullname,email,username,password) VALUES (?,?,?,?)",
             [fullname, email, username, hash],
             err => {
                 if (err) {
@@ -63,7 +63,7 @@ app.post("/login", (req, res) => {
     const { username, password } = req.body;
 
     db.query(
-        "SELECT * FROM users WHERE username = ?",
+        "SELECT * FROM USER_LISTS WHERE username = ?",
         [username],
         async (err, rows) => {
             if (err || rows.length === 0) {
@@ -80,3 +80,4 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log("Server running on port " + PORT);
 });
+
