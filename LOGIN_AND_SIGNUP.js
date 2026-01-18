@@ -139,7 +139,13 @@ app.get("/logout", (req, res) => {
 });
 
 /* ================= SERVER ================= */
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, "0.0.0.0", () => {
     console.log("🚀 SERVER STARTED ON PORT", PORT);
 });
+
+setInterval(() => {
+    console.log("🫀 keep-alive ping");
+}, 1000 * 60 * 5); // every 5 minutes
+
 
