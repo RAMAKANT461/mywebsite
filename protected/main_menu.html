@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Control Panel</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        /* ===== BACK ARROW ===== */
+        .back-arrow {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 78px;
+            height: 78px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+            transition: 0.3s ease;
+            z-index: 999;
+        }
+
+            .back-arrow:hover {
+                background: #00eaff;
+                color: black;
+                transform: scale(1.1);
+            }
+
+
+
+        /* ===== MAIN CONTAINER ===== */
+        .panel {
+            width: 900px;
+            padding: 40px;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.4);
+        }
+
+            .panel h1 {
+                text-align: center;
+                margin-bottom: 40px;
+                font-size: 36px;
+                color: #00eaff;
+                letter-spacing: 1px;
+            }
+
+        /* ===== OPTIONS GRID ===== */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            height: 160px;
+            background: rgba(255,255,255,0.12);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.4s ease;
+            box-shadow: 0 0 20px rgba(0,234,255,0.25);
+        }
+
+            .card:hover {
+                transform: translateY(-10px) scale(1.03);
+                background: #00eaff;
+                color: black;
+                box-shadow: 0 0 35px #00eaff;
+            }
+
+        .icon {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .title {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="back-arrow" onclick="goToLogin()">
+        ⬅
+    </div>
+
+    <div class="panel">
+        <h1>⚙️ Control Panel</h1>
+
+        <div class="grid">
+
+            <div class="card">
+                <div class="icon">➕</div>
+                <div class="title">Add ID</div>
+            </div>
+
+            <div class="card">
+                <div class="icon">🔍</div>
+                <div class="title">Filter</div>
+            </div>
+
+            <div class="card">
+                <div class="icon">💾</div>
+                <div class="title">Backup</div>
+            </div>
+
+            <div class="card">
+                <div class="icon">♻️</div>
+                <div class="title">Restore</div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
+<script>
+    function goToLogin() {
+        window.location.href = "login.html";
+    }
+</script>
+
+
